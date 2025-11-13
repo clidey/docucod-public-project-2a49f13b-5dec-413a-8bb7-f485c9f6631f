@@ -1,0 +1,195 @@
+---
+title: "Filters and Variables: Dynamic Note Content"
+description: "Leverage filters and variables inside templates to extract, format, and transform web content when saving notes. Explore practical patterns for handling metadata, dates, and more."
+---
+
+# Filters and Variables: Dynamic Note Content
+
+Templates in Obsidian Web Clipper gain powerful flexibility by using filters and variables to dynamically extract, format, and transform content from web pages when saving notes. This page guides you through leveraging these tools inside your templates to create notes that adapt intelligently to the source content, empowering precise control over metadata, dates, text formatting, and complex structures. Expect some hands-on examples and best practices to help you enrich your clipping workflows efficiently.
+
+## Understanding Variables and Filters Together
+
+Variables in Web Clipper templates represent pieces of data extracted automatically from the webpage you’re clipping. These variables include page title, author, selected text, metadata, schema.org data, and more. Filters are functions you can apply to these variables inline to reformat, clean, or manipulate the data output before it becomes part of your saved note.
+
+For example, the variable `{{date}}` returns the current date, but applying the filter `|date:"YYYY-MM-DD"` transforms it to a specific date format: `{{date|date:"YYYY-MM-DD"}}`. Filters use a clear syntax: you append them with a pipe `|` character after the variable name, and you can chain multiple filters if needed. This approach makes it easy to tailor raw extracted data dynamically without external tooling.
+
+Variables originate from different categories based on how they get their data from the page or user input:
+
+- **Preset variables** like `{{title}}` or `{{content}}` provide common page data.
+- **Prompt variables**, enclosed in double quotes like `{{"summary of page"}}`, use natural language processing when enabled.
+- **Meta variables** extract HTML meta tags.
+- **Selector variables** rely on CSS selectors to pull specific page elements.
+- **Schema.org variables** parse embedded structured JSON-LD data.
+
+Once you have your variable, filters modify that value to fit your exact needs.
+
+<Tip>
+Use the ellipsis menu in the extension popup to inspect which variables are available for the current page. This visual help lets you pick and test variables before embedding them in templates.
+</Tip>
+
+## Common and Practical Filters
+
+Filters cover a comprehensive range of data transformations, but some are particularly useful in day-to-day clipping scenarios. These include date formatting, capitalization, string trimming, HTML processing, list manipulation, and safe file naming.
+
+### Handling Dates and Times
+
+Managing dates is a frequent requirement when saving web content. The `date` filter formats dates using the widely adopted [Day.js](https://day.js.org/docs/en/display/format) patterns, while `date_modify` lets you offset dates dynamically.
+
+For instance, turning a page’s published date into a year-month-day string looks like this:
+
+```handlebars
+{{published|date:"YYYY-MM-DD"}}
+```
+
+If you want to add a month to today’s date, use:
+
+```handlebars
+{{date|date_modify:"+1 month"}}
+```
+
+The `duration` filter converts ISO 8601 durations or plain seconds into human-readable time strings, useful for formatting video lengths or audio durations.
+
+### Text Transformation Filters
+
+Filters such as `capitalize`, `camel`, `snake`, `kebab`, `pascal`, `title`, `lower`, and `upper` help adjust case and word separation to fit your style or naming conventions. For example, to convert a title to slug format for use in a filename or URL, combine:
+
+```handlebars
+{{title|kebab|lower}}
+```
+
+The `replace` filter is particularly powerful for tailored string substitutions or cleanup, supporting plain text replacements and JavaScript-regex patterns, enabling you to filter out unwanted characters or strings from variables.
+
+<Tip>
+When using special characters in `replace` filters (such as colons, pipes, or braces), escape them properly with a backslash to ensure correct parsing.
+</Tip>
+
+### HTML and Markdown Content Processing
+
+If the variable returns HTML content, filters like `markdown` convert it into Markdown format, perfect for keeping web content in the Obsidian-native syntax.
+
+Filters like `remove_tags`, `remove_html`, `strip_attr`, and `strip_tags` give fine control on sanitizing or altering HTML fragments before saving.
+
+For example, removing all `script` and `style` tags from the extracted content could be written as:
+
+```handlebars
+{{contentHtml|remove_html:"script,style"|markdown}}
+```
+
+### Working with Arrays and Objects
+
+When variables yield arrays or objects (such as lists extracted from schema.org data), you can manipulate them programmably. Filters like `map`, `join`, `slice`, and `unique` help reformat this data.
+
+An example: extracting all author names from a Schema.org author array and outputting a comma-separated list:
+
+```handlebars
+{{schema:@Article:author[*].name|join:", "}}
+```
+
+This retrieves all author names and joins them with commas.
+
+## Advanced Variable Usage Patterns
+
+Sometimes, you need to extract very specific data or apply complex transformations within templates.
+
+### Meta and Selector Variables
+
+- Meta variables use `{{meta:name:description}}` or `{{meta:property:og:title}}` to pull directly from meta tags.
+- Selector variables use CSS selectors: `{{selector:h1}}` returns the first `h1` element’s text, and `{{selectorHtml:.article-content}}` returns the content as HTML.
+
+Combining these with filters makes it straightforward to tailor extraction for sites with inconsistent structures.
+
+### Schema.org JSON-LD Extraction
+
+Schema.org variables allow tapping into structured data embedded on pages. You can access nested properties and arrays, and use shortcuts when you don’t want to specify types explicitly.
+
+Examples:
+
+- Get the first author name: `{{schema:author.name}}`
+- Get the name of the second author: `{{schema:author[1].name}}`
+- Get all guest stars in a TV episode: `{{schema:actor[*].name}}`
+
+Because these can return arrays, use filters like `first`, `join`, or `map` to process them.
+
+### Prompt Variables with Filters
+
+Prompt variables use natural language queries processed by an interpreter service. They support chaining filters to convert results into desired formats. For example, you can generate a 3-point summary and format it as a blockquote:
+
+```handlebars
+{{"3 bullet points summary"|blockquote}}
+```
+
+### Escaping and Safe Naming
+
+When using variables in file paths or note titles, apply `safe_name` to ensure names conform to filesystem rules. You can specify OS-specific rules like `safe_name:windows`.
+
+```handlebars
+{{title|safe_name:windows}}
+```
+
+This prevents characters like `\ / : * ? " < > |` from breaking file saving.
+
+## Putting It All Together: Template Example
+
+A real-world snippet that uses multiple variable types and filters may look like this:
+
+```handlebars
+---
+author: {{schema:author[0].name|capitalize}}
+date: {{published|date:"YYYY-MM-DD"}}
+tags: {{tags|join:", "}}
+---
+
+# {{title|title}}
+
+{{content|remove_html:"script,style"|markdown}}
+
+---
+
+Summary:
+{{"Summarize the main points"|blockquote}}
+```
+
+This template extracts the first author’s name from schema.org data, formats publication date, lists tags, cleans the article content, and requests a summary with prompt processing.
+
+<Tip>
+Test variable expressions using the extension’s variable inspector to preview output and iterate on your template design.
+</Tip>
+
+## Common Pitfalls and Best Practices
+
+When working with filters and variables, keep these in mind:
+
+- Always escape special characters in filters and variable names to avoid parsing errors.
+- Use the variable inspector to check what data is available for the current page.
+- Start simple: build templates incrementally, testing each variable and filter.
+- Avoid prompt variables when structured data or selectors can reliably extract your needed content for speed and privacy.
+- Chain filters logically, and remember they apply in sequence from left to right.
+
+<Tip>
+If your filtered variable returns unexpected empty results, verify that the base variable contains valid data, and that the filter syntax matches the documented usage.
+</Tip>
+
+## Troubleshooting Variable and Filter Issues
+
+If the variables or filters do not behave as expected:
+
+- Confirm the variable name is spelled correctly and matches available page data.
+- Inspect browser console for errors related to filter processing.
+- Check that any CSS selectors used in selector variables still match the target elements on the page.
+- Ensure that prompt-based variables work only when the Interpreter feature is enabled and configured.
+
+If you suspect an invalid or unsupported filter, the system logs an error and returns the original input.
+
+For persistent issues, consult the community and file issues in the [GitHub repository](https://github.com/obsidianmd/obsidian-clipper).
+
+## Next Steps
+
+Having mastered variables and filters, extend your templates further by exploring:
+
+- Template customization and triggers in the [Using Templates Guide](/guides/core-workflows/using-templates).
+- Enhancing your clips with clean content using [Reader Mode](/guides/advanced-use-cases/reader-mode-usage).
+- Building complex content extraction using schema and selectors.
+
+Dynamic note content is the gateway to automating your knowledge capture elegantly. Harness filters and variables skillfully to transform raw web data into polished, context-rich notes.
+
+<Source url="https://github.com/obsidianmd/obsidian-clipper" paths={["docs/Filters.md", "docs/Variables.md", "src/utils/filters.ts", "src/utils/variables/schema.ts"]} />
