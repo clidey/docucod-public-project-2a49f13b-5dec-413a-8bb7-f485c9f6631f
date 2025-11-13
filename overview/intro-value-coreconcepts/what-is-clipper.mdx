@@ -1,0 +1,56 @@
+---
+title: "What is Obsidian Web Clipper?"
+description: "Introduces Obsidian Web Clipper, outlining its purpose: enabling users to efficiently capture and highlight web pages in their browser and save those highlights as Markdown files in Obsidian. Summarizes the core value proposition—offline access, durable notes, and seamless integration into Obsidian—from the perspective of writers, researchers, and anyone looking to organize information from the web."
+---
+
+## Understanding Obsidian Web Clipper: Capture and Access Web Content Seamlessly
+
+In an age rich with online information, capturing valuable web content quickly and preserving it for later use is essential. Obsidian Web Clipper empowers users—writers, researchers, and knowledge workers alike—to efficiently capture, highlight, and save web pages in a format that integrates directly with their Obsidian vault. This extension ensures your clipped content remains accessible offline, organized, and durable, enabling a smoother research and writing workflow.
+
+## What Obsidian Web Clipper Does and Who Benefits Most
+
+Obsidian Web Clipper is a browser extension designed to let you save and highlight web pages in your browser and store those highlights as Markdown files in your Obsidian vault. Rather than relying on ephemeral bookmarks or tabs, this tool converts selected web content into private, persistent notes you can access anytime, offline or online.
+
+This extension is ideal for writers compiling references, researchers organizing source materials, students capturing learning resources, and anyone who wants to effortlessly bring web content into Obsidian without losing context or formatting. By turning fragments of the web into durable notes in Markdown, the clipper supports a frictionless knowledge management experience.
+
+## How Obsidian Web Clipper Works at a Glance
+
+At its core, Obsidian Web Clipper operates as a browser extension installed in your preferred browser, such as Chrome, Firefox, or Safari. When you decide to capture content from a web page, the clipper extracts relevant information—including the page content, selected highlights, metadata like author and publication date, and resources such as images. It cleans up the captured HTML by removing scripts and styles that might interfere with readability and converts URLs to absolute paths to maintain integrity.
+
+This processed content is then saved as a Markdown file within your Obsidian vault, using customizable templates to define note naming, folder structure, and frontmatter metadata. The extension communicates seamlessly with Obsidian through URIs or file APIs, ensuring your notes feel native and immediately available.
+
+The extension also supports advanced modes like reader view—stripping away distractions for a clean reading experience—and highlighter mode, which lets you annotate text on the fly before saving. The interface can be launched as a popup, embedded side panel, or even an inline iframe, adapting to your workflow and browser capabilities.
+
+<Source url="https://github.com/obsidianmd/obsidian-clipper" paths={[{"path": "src/content.ts", "range": "1-375"}]} />
+
+## Real-World Use: Capturing, Highlighting, and Organizing Web Pages
+
+Imagine reading a dense research article on a browser. With Obsidian Web Clipper, you can highlight key statements directly on the page and then open the clipper popup to save those highlights alongside contextual notes. The clipper generates a Markdown file containing your selected passages, metadata such as author and publish date, and links back to the source, neatly formatted per your template preferences.
+
+For example, after highlighting a paragraph, clicking the clipper icon opens an interface where you can adjust the note name, add personal comments, or choose the destination folder inside your Obsidian vault. Once saved, your note is immediately available for offline review, further annotation, or integration into larger projects. 
+
+This seamless process eliminates the friction of manual copying or bookmarking, helping you build a personal knowledge base grounded in reliable, well-organized web excerpts. The clipper also supports batch content extraction and can toggle reader mode to cleanly display main article text before clipping, enhancing focus.
+
+```javascript
+// Example: Toggling the highlighter mode via popup button
+const highlighterButton = document.getElementById('highlighter-mode');
+highlighterButton?.addEventListener('click', () => {
+  browser.runtime.sendMessage({ action: 'toggleHighlighterMode', tabId: currentTabId });
+});
+```
+
+This snippet shows how the extension allows toggling highlight annotations programmatically, giving users fluid control over their clipping experience.
+
+## Quick Start Preview and Moving Forward
+
+To begin using Obsidian Web Clipper, simply install the extension from your browser’s official store (Chrome Web Store, Firefox Add-Ons, or Safari Extensions). After installation, you can launch the clipper via the toolbar icon or keyboard shortcuts tailored to your browser and platform. 
+
+Configuration involves selecting your Obsidian vault, setting note templates, and optionally enabling features like reader mode or highlighter mode. The dedicated [Getting Started Guide](/getting-started/installation-and-setup/install-extension) walks you through setup and first clips.
+
+For detailed workflows, including how to customize templates, use variables, or troubleshoot common issues, explore the comprehensive guides linked in the main documentation. This page is your foundation to understand why the clipper matters and how it fits into efficient knowledge capture.
+
+Embark on your clipping journey to transform fleeting web insights into lasting notes organized precisely the way you want.
+
+---
+
+For related insights, see the [Target Audience & Use Cases](/overview/intro-value-coreconcepts/target-users-main-usecases) and [Feature Quick Tour](/overview/arch-overview-quickfeatures/feature-tour) sections to deepen your understanding of Obsidian Web Clipper's broader capabilities and fit within the Obsidian ecosystem.
