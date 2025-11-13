@@ -1,0 +1,84 @@
+---
+title: "System Architecture Overview"
+description: "Provides a mermaid diagram showing the core architectural components: browser extension scripts, content extraction layer, UI components (popup, side panel), storage workflow, and integration with Obsidian. Explains how data flows from web page to Markdown note, highlighting any cross-browser support and major dependencies."
+---
+
+## Understanding the System Architecture of Obsidian Web Clipper
+
+The Obsidian Web Clipper transforms your browser into a powerful knowledge capture tool by seamlessly channeling web content into your Obsidian vault. This page details the technical architecture behind the scenes, focusing on how the extension’s components work together to extract, process, and save web content as Markdown notes. Understanding this flow will clarify how your clipping actions translate into persistent, structured files accessible offline.
+
+## Core Components and Their Roles
+
+At its heart, the architecture consists of several interconnected parts working in concert within your browser environment. The **browser extension scripts** run background processes and UI elements — including the popup and side panel — orchestrating user commands and handling storage. Closely tied to this is the **content extraction layer**, which operates in the context of the web page you want to clip, parsing and sanitizing content efficiently. The **UI components** provide interaction points through a popup menu and an optional resizable side panel embedded in the page.
+
+Together, these components manage the entire lifecycle: from capturing your web selection or full page, enriching it (like extracting metadata or highlighting), to triggering save operations that result in Markdown files integrated into your Obsidian vault.
+
+## How Data Flows: From Web Page to Markdown
+
+When you initiate a clip, the extension first ensures the **content script** is injected into the active browser tab, enabling it to interact directly with the page DOM. This script extracts clean HTML content, removes scripts and style elements, and converts relative URLs to absolute references to preserve context. It also employs the external library *Defuddle* to parse rich metadata such as the author, publication date, and schema.org data embedded in the page.
+
+Once the raw content is collected, it’s communicated back to the background script, which applies user-configured templates and variables to format the content into Markdown. At this point, if you have highlighting enabled, the highlighter module tracks and manages user highlights across pages, ensuring that these annotations accompany saved notes.
+
+Finally, the prepared Markdown is saved to your vault using Obsidian’s URI scheme or local filesystem integration, respecting your settings for file naming, location, and saving behavior. The user interface components update correspondingly to reflect the clip’s success or expose further actions like editing templates or managing properties.
+
+```mermaid
+flowchart TD
+
+  subgraph BrowserExtension
+    BG["Background Script"]
+    Popup["Popup UI"]
+    SidePanel["Side Panel UI"]
+  end
+
+  subgraph WebPage
+    ContentScript["Content Script"]
+    PageDOM["Web Page DOM"]
+  end
+
+  subgraph ExternalLibraries
+    Defuddle["Defuddle (Content Parsing)"]
+  end
+
+  PageDOM --> ContentScript
+  ContentScript -->|Extracts content and metadata| Defuddle
+  Defuddle --> ContentScript
+  ContentScript -->|Sends content data| BG
+  Popup -->|User commands| BG
+  SidePanel -->|User commands and display| BG
+  BG -->|Commands injection| ContentScript
+  BG -->|Saves Markdown files| ObsidianVault["Obsidian Vault via URI/File System"]
+  ContentScript -- Highlights & annotations --> BG
+
+  classDef important fill:#fffae3,stroke:#f4d35e,stroke-width:2px;
+  BG,ContentScript,Popup,SidePanel,Defuddle,ObsidianVault class important;
+```
+
+## Architecture in Action: Real-World Use Cases
+
+Imagine researching for a writing project. You activate the clipper popup from your browser toolbar, selecting key paragraphs and images on an article page. The content script captures these selections along with the page’s title, author info, and other metadata.
+
+This data transitions to the background script, where your predefined template formats it with front matter specifying the source URL and date clipped. If highlights were applied during reading, those annotations transfer and become searchable tags.
+
+The final Markdown file lands seamlessly in your preferred Obsidian vault folder, ready for offline access, further annotation, or synthesis with existing notes. Meanwhile, the side panel offers a live view of recent clips, enabling quick navigation or edits without leaving the browser.
+
+For instance, a user might adjust the side panel size dynamically via built-in resize handles (left and bottom edges), tailoring their workspace while clipping detailed content from multiple tabs simultaneously.
+
+## Cross-Browser Support and Key Dependencies
+
+The system’s architecture ensures compatibility across Chromium-based browsers (Chrome, Brave, Edge) and Firefox by dynamically injecting the content script using either the `scripting.executeScript` API or fallback methods. This adaptability means the full feature set—highlighting, reader mode integration, and side panel embedding—works smoothly in your preferred browser.
+
+Major dependencies include *webextension-polyfill* for uniform browser API access and *Defuddle* for advanced content parsing. Together, they underpin the clipper's reliability and extensibility without compromising performance or security.
+
+<Tip>
+Note that content extraction removes all script and style tags from the clipped HTML to ensure clean Markdown conversion and protects against unwanted code execution.
+</Tip>
+
+## Preparing to Use the System Architecture
+
+To harness the full capabilities described here, start by installing the extension from browser stores, then familiarize yourself with the [Getting Started Guide](/getting-started/installation-and-setup/install-extension) to configure storage, templates, and providers.
+
+Next, explore [Feature Quick Tour](/overview/arch-overview-quickfeatures/feature-tour) to see the UI elements and learn how to control clipping and highlights.
+
+Understanding this architecture will empower you to troubleshoot effectively and optimize your workflow, whether you're a student, researcher, or knowledge worker relying on rich, long-term web content capture.
+
+<Source url="https://github.com/obsidianmd/obsidian-clipper" branch="main" paths={[{"path": "src/content.ts", "range": "1-320"}, {"path": "src/background.ts", "range": "10-250"}]} />
