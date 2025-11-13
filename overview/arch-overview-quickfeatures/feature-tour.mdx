@@ -1,0 +1,43 @@
+---
+title: "Feature Quick Tour"
+description: "Summarizes the primary features at a glance: clipping web content, highlighting, using templates and filters, offline storage as Markdown, multi-browser support, and integration with Obsidian. Provides context for how each feature meets user needs along the core workflow."
+---
+
+## Feature Quick Tour
+
+The Feature Quick Tour provides a concise yet comprehensive glance at the core capabilities of the Obsidian Web Clipper, empowering you to quickly understand how this tool transforms web content into valuable, offline-accessible Markdown notes within your Obsidian vault. This section highlights the main features, focusing on how each supports your workflow from capturing and highlighting web pages to customizing saving behavior with templates and filters. Whether you are aiming to save research materials, annotate web content, or organize information efficiently, this quick tour clarifies how the clipper meets those needs with seamless integration and versatile options.
+
+## What You Can Do with Obsidian Web Clipper
+
+At its heart, Obsidian Web Clipper is designed to capture web content easily and flexibly, adapting to diverse user goals. You can clip full web pages or just selected highlights, turning ephemeral browser content into durable Markdown files accessible without internet connection. This capability ensures your research, articles, and annotations are preserved in a format that integrates naturally into your Obsidian notes.
+
+Templates enable you to shape the output of your clips, adding metadata, applying filters, and arranging content to suit your organizational style. Filters and variables give you control to dynamically customize note content, injecting context or transforming text as needed. Supporting multiple browsers, the clipper fits seamlessly into your preferred environment, and notes are saved offline, assuring availability anytime. Together, these features streamline capturing, organizing, and reusing web knowledge effectively.
+
+## How Core Features Support Your Workflow
+
+The clipper’s powerful highlighter lets you engage directly with web content, marking sections, images, or text to capture selectively. This interaction goes beyond simple clipping; it’s about curating exactly what matters, enhancing your notes with meaningful highlights. Integrated templates then translate these selections into your preferred Markdown structure, embedding metadata or specialized formatting with minimal effort.
+
+By supporting multiple save behaviors, you decide whether clips add new notes to your vault, update existing ones, or export content elsewhere. For instance, you might create daily notes that accumulate information, or save detailed, standalone pages for deep research. This flexibility aligns the clipper with a range of workflows.
+
+Moreover, the integrated interpreter uses natural language prompts within templates to extract summaries or specific insights from pages, powered by configured models and API keys. This feature lets you go beyond raw clipping—turning web pages into actionable knowledge summaries. The client-side design also ensures quick operation without exposing your data externally.
+
+```javascript
+// Example: Using a template variable and filter to capture highlighted texts
+const clippedNote = `
+# ${page.title}
+
+${highlights.map(h => `- ${h.text}`).join('\n')}
+
+_Captured on ${new Date().toLocaleDateString()}_
+`;
+```
+
+## Getting Started Preview and Next Steps
+
+Preparing to use Obsidian Web Clipper involves setting up the extension through your browser’s recommended source, then configuring your templates and preferences to align with your workflow needs. This page serves as the gateway to a deeper dive into each feature covered briefly here.
+
+To begin, install the extension for your preferred browser and explore the step-by-step guide for capturing your first clip. You’ll then want to configure templates, start highlighting content, and understand key behaviors through the detailed guides available.
+
+For a beginner-friendly start, see the [Getting Started Guide](/getting-started/installation-and-setup/install-extension) and then continue exploring advanced capabilities via the linked sections throughout the documentation.
+
+<Source url="https://github.com/obsidianmd/obsidian-clipper" paths={[{"path": "src/_locales/en/messages.json", "range": "1-200"},{"path": "docs/Clip web pages.md", "range": "1-90"}]} />
