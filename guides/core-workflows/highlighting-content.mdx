@@ -1,0 +1,95 @@
+---
+title: "Highlight and Annotate Web Content"
+description: "Master the highlighter mode to mark important passages or code in web pages before saving. Understand how highlights are managed, extracted, and stored in your notes."
+---
+
+# Highlight and Annotate Web Content
+
+The Highlight and Annotate Web Content page empowers you to harness the highlighter mode within Obsidian Web Clipper. This feature lets you mark key passages or code snippets directly on web pages as you browse, elevating your note-taking by capturing not just the page, but your insights on it. You'll learn how highlights are created, managed, and integrated seamlessly into your saved notes, enabling a richer and more organized knowledge workflow.
+
+## Mastering Highlighter Mode
+
+Highlighter mode transforms the way you interact with web content by allowing you to select text, images, and other elements to emphasize directly on the page. When activated via the extension popup or your browser’s context menu, it overlays intuitive controls and visual cues to help you easily add, modify, or remove highlights without disrupting your browsing experience.
+
+Enabling this mode turns the cursor into a precise tool: you can drag to select phrases, click on images or blocks to highlight entire sections, and annotate with optional notes. Behind the scenes, the system records your selections in a structured format, preserving the context of where and what you highlighted. This ensures that when the content is clipped into Obsidian, your highlights are retained as Markdown syntax (`==highlight==`) or as separate structured data, depending on your settings.
+
+## How Highlights Are Managed and Stored
+
+Highlights are tracked and stored within the page context using efficient mechanisms to ensure performance and persistence. When you make a highlight, it is represented as an object capturing its location (often by XPath), the exact content, and any notes you add. Obsidian Web Clipper maintains a history of your highlights, enabling undo and redo actions to refine your selections dynamically.
+
+These highlights appear as translucent overlays on the original web page, updated responsively as you interact with the page or resize your browser. The system smartly merges overlapping or adjacent highlights to keep your annotation clean and coherent.
+
+For deeper integration, your highlights can be exported and re-imported via JSON files, offering you portability and backup options. When saving the clipped content, the highlights are optionally injected inline in the Markdown using your specified template variables, letting you customize how and where they appear in your notes.
+
+<Tip>
+You can adjust how highlights are incorporated into your clipped notes in the Web Clipper settings under 'Highlighter Behavior'. Options include embedding highlights inline as Markdown highlights, replacing page content with only your highlights, or ignoring highlights altogether in the final note.
+</Tip>
+
+## Practical Usage Workflow
+
+Activating and working with highlights flows smoothly within your clipping process. You can toggle highlighter mode from the popup or via hotkeys configured in the extension, then directly select text or click elements on the page. The highlighter interface appears as a compact menu showing your number of highlights, letting you clip your highlights, clear them all, or undo/redo your recent changes.
+
+If you prefer keyboard shortcuts, Obsidian Web Clipper supports commands for toggling the highlighter mode and triggering a clip instantly—streamlining repeated workflows for power users.
+
+When you save your clipped note, highlights embedded inline follow the syntax familiar to Obsidian Markdown users, ensuring your content is immediately usable and perfectly styled in your vault.
+
+<Note>
+To maximize your highlighting experience, ensure the highlighter feature is enabled in your extension general settings and experiment with the highlight behavior to fit your clipping style.
+</Note>
+
+## Tips and Best Practices
+
+Highlights on complex page structures, such as tables or nested elements, are carefully managed. Highlighting a table cell or row will automatically target the entire table for visual consistency. The highlighter only allows annotations on supported block-level elements to prevent errant highlights that could break your note format.
+
+If a highlight doesn't appear as expected, consider the following:
+
+- Ensure that the element you want to highlight is not disallowed (e.g., images themselves are allowed, but SVGs and videos may require special handling).
+- Check that overlapping highlights are not combined due to adjacency rules that merge highlights for cleaner display.
+- Undo and redo buttons in the highlighter menu help you revert accidental changes efficiently.
+
+<Tip>
+Highlights added are preserved across page reloads when 'Always Show Highlights' is enabled, making them persistent annotations during research sessions or deep dives.
+</Tip>
+
+<Warning>
+Excessively overlapping or nested highlights can sometimes lead to unexpected formatting in the clipped note. Try to keep highlights clear and span meaningful blocks for the best results.
+</Warning>
+
+## Integration With Clipping and Templates
+
+The highlighter mode integrates tightly with the clipping workflow. When you initiate a clip from the popup or via the highlighter menu, the collected highlights are packaged along with the page content and other metadata variables. Your templates can use the `{{highlights}}` variable to include all highlights as structured data or render them inline within the content with `==highlight==` syntax.
+
+This flexibility lets you create notes that reflect exactly what you emphasized, with annotations enriching your captured knowledge base.
+
+For example, your template's content section might use:
+
+```markdown
+{{content}}
+
+---
+
+## Highlights
+
+{{highlights|map: item => item.text|join:"\n\n"}}
+```
+
+This setup will append a Highlight section listing all your selected texts neatly.
+
+## Troubleshooting Common Issues
+
+If highlights do not appear or save correctly, verify that:
+
+- Highlighter mode is active on the correct browser tab.
+- Your extension version is up to date and correctly installed.
+- There are no conflicting browser extensions intercepting page content or DOM manipulations.
+- Your Web Clipper settings allow for highlights to be embedded or included.
+
+If highlights are unexpectedly cleared, check the 'Always Show Highlights' setting to maintain them persistently. Reopening highlighter mode restores your overlays.
+
+For more advanced cases, exporting your highlights for backup or sharing is accessible in settings.
+
+---
+
+Consult the related [Webpage Clipping](/guides/core-workflows/webpage-clipping) guide to understand clipping decisions, and the [Using Templates](/guides/core-workflows/using-templates) documentation to leverage highlight variables effectively.
+
+<Source url="https://github.com/obsidianmd/obsidian-clipper" paths={[{"path": "src/utils/highlighter.ts", "range": "1-300"}, {"path": "src/content.ts", "range": "1-350"}]} />
