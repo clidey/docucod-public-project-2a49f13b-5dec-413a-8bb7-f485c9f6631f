@@ -1,0 +1,70 @@
+---
+title: "Integration & Compatibility"
+description: "Briefly outlines supported browsers and platforms (Chrome, Firefox, Safari, Edge, and mobile variants) and explains how Obsidian Web Clipper connects and syncs with the main Obsidian application, including the durable storage of web-clipped notes."
+---
+
+## Integration & Compatibility
+
+Connecting the Obsidian Web Clipper seamlessly across browsers and platforms ensures users can reliably capture content and organize their knowledge with confidence. This page provides an overview of the supported browsers and platforms for the Web Clipper, explains how it maintains synchronization and durable storage with the Obsidian vault, and highlights the integration mechanisms that underpin a smooth user experience.
+
+### Supported Browsers and Platforms
+
+Obsidian Web Clipper is designed to work across all major modern browsers, supporting both desktop and mobile variants to maximize accessibility. The extension is officially available for Chrome, Firefox, Safari, Microsoft Edge, and their mobile counterparts, covering a wide range of environments where users conduct research, writing, and note-taking.
+
+Each browser version is tailored to respect platform-specific constraints and capabilities, offering features such as popup windows, embedded side panels, and interaction with native OS file handling when available. This broad support ensures consistent behaviors whether you clip on a desktop in Chrome or browse on an iOS device using Safari.
+
+The extension's availability for mobile Safari extends its usefulness to iOS and iPadOS users, bridging the gap between mobile and desktop workflows in Obsidian.
+
+### How Web Clipper Connects to Obsidian
+
+At the core, Obsidian Web Clipper saves clipped content directly into a user’s Obsidian vault as Markdown files. This connection is secure and local in nature, relying on the user’s vault setup rather than cloud servers, ensuring privacy and offline access.
+
+When a user saves a clip, the extension formats the web content according to customizable templates, producing structured Markdown notes. These notes are stored persistently within the vault locations that users define in their settings, supporting multiple vaults if configured.
+
+Integration with Obsidian includes:
+
+- **Vault Selection and Management**: Users can add or remove vault paths within the extension’s settings. This enables direct saving into chosen vaults, maintaining users’ organizational preferences.
+
+- **Save Behaviors**: Options allow users to save clipped content either by adding new notes, copying content to the clipboard, or saving files to local storage, providing flexible workflows for different use cases.
+
+- **Synchronization of Settings and History**: The extension uses browser storage synced as permitted by the platform, retaining settings, clip history, and templates across installations if the user enables such synchronization.
+
+In all cases, saved clips become fully accessible within Obsidian as native Markdown files, ready for offline reading, editing, linking, and further annotation.
+
+### Durable Storage of Web-Clipped Notes
+
+Obsidian Web Clipper prioritizes reliable storage so that web-clipped notes remain available long-term. Once a clip is saved to an Obsidian vault, it benefits from Obsidian’s native versioning and file backup systems.
+
+The extension's architecture includes mechanisms to sanitize input, prevent data corruption, and ensure that file names and paths conform to vault standards. It converts web content into clean Markdown with embedded metadata to retain context.
+
+Additionally, the extension manages history on the browser side, allowing users to revisit past clips and analyze usage metrics. Statistics on clip actions like saving, copying, and sharing are also tracked to provide insights on user behavior.
+
+### Integration Scenarios and User Experience
+
+When you activate a clip, Obsidian Web Clipper verifies the current web page’s suitability for clipping—only pages with HTTP/S URLs are accepted. The extension loads the user’s last selected vault or prompts for vault selection if none exist.
+
+The clipper dynamically compiles templates using page-specific variables, letting you create richly formatted notes. Upon saving, the extension either opens the note automatically in Obsidian or handles the save silently, depending on the user’s settings and platform capabilities.
+
+For browsers supporting side panels (e.g., Chrome), the Web Clipper can display an embedded interface without interrupting your browsing.
+
+Example flow:
+
+```plaintext
+User clicks the clip button → Current tab content is parsed and sanitized → Template is compiled with page variables → Note saved to selected vault → Statistics updated → (Optional) User is brought to Obsidian or clipboard updated
+```
+
+This experience is consistent across supported browsers, with subtle adaptations for platform limitations such as mobile Safari’s keyboard shortcuts and share capabilities.
+
+### Practical Tips for Integration Success
+
+To ensure smooth operation:
+
+- Confirm your vault paths in the General Settings are accurate and match your Obsidian vault directory names.
+- Select the appropriate save behavior to fit your workflow (e.g., direct save versus clipboard copy).
+- Be aware that the embedded side panel feature is available mainly on Chromium-based browsers.
+- For mobile usage, leveraging Safari’s native sharing dialog may enable faster note sharing.
+- Enable synchronization in your browser if you want consistent settings across devices.
+
+By understanding these integration aspects, users can confidently clip content anywhere and maintain a consistent Obsidian knowledge base.
+
+<Source url="https://github.com/obsidianmd/obsidian-clipper" />

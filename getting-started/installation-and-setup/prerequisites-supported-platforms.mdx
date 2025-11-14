@@ -1,0 +1,50 @@
+---
+title: "Prerequisites & Supported Platforms"
+description: "Understand the system requirements, supported browsers (Chrome, Firefox, Safari, Edge), and vault eligibility before installing the extension. Ensure you’re prepared for a smooth setup, whether you’re on desktop or mobile."
+---
+
+## Prerequisites & Supported Platforms
+
+Before installing the Obsidian Web Clipper extension, it is important to verify that your system and browser environment meet the necessary requirements for seamless integration and reliable functionality. Whether you're using a desktop or mobile device, this guide outlines supported browsers, operating systems, and configuration aspects essential to prepare you for a smooth setup experience.
+
+### Supported Browsers and Operating Systems
+
+Obsidian Web Clipper supports a broad range of popular browsers across desktop and mobile platforms. The extension offers tailored integrations to ensure compatibility and performance optimized for your environment.
+
+- **Desktop Browsers:** The extension installs on modern versions of Chrome, Brave, Edge, Firefox, Safari (macOS), and the Orion browser, covering the majority of desktop browser usage scenarios. Chromium-based browsers such as Chrome, Brave, Edge, and Arc share a common foundation that the extension leverages for consistent behavior.
+
+- **Mobile Browsers:** For mobile devices, Firefox Mobile and Safari for iOS and iPadOS are supported. These browsers maintain the ability to install and run extensions, although with some platform-specific constraints addressed internally by Web Clipper.
+
+- **Operating Systems:** Windows, macOS (including macOS Ventura and later), iOS, and iPadOS are supported. The extension includes browser detection logic that recognizes device and platform specifics, such as identifying iPadOS distinctly from macOS Safari, enabling correct UI and functionality adaptations.<br />This detection adapts features and CSS classes for native behaviors on each platform, as demonstrated in the browser detection utility (<Source url="https://github.com/obsidianmd/obsidian-clipper" branch="main" paths={[{"path": "src/utils/browser-detection.ts", "range": "1-94"}]} />).
+
+### Vault Eligibility
+
+To successfully save clips, you must have access to at least one Obsidian vault configured on your device where the Markdown files can be stored. Vaults act as the destination repositories for clipped content.
+
+- Vaults must be properly initialized and accessible to the Web Clipper extension.
+- On first configuration, you should select or define a default vault to streamline the clipping workflow.
+- Vaults can be located locally on your machine or synced via cloud solutions supported by Obsidian.
+
+### Key System Permissions and Requirements
+
+Web Clipper requires standard extension permissions necessary for interaction with tabs, clipboard, context menus, and storage. Ensure your browser allows the extension to have the following permissions:
+
+- Access to `activeTab` to read the webpage data you want to clip.
+- Clipboard write access to enable copying clipped content.
+- Storage permissions to save templates, settings, and clip history.
+- Scripting permissions to inject content scripts required for extracting page content.
+
+These permissions are clearly declared in the extension manifests for respective browsers.
+
+### Preparing Your Environment
+
+Verify that your browser supports extension installation and that you have the ability to configure your vaults in Obsidian prior to installation. If using mobile platforms:
+
+- On iOS/iPadOS, Web Clipper installs as a Safari extension accessible via the Extensions button in Safari’s toolbar.
+- On Android, Firefox Mobile extensions require enabling advanced features as per Firefox's guidelines.
+
+Ensure your browser is updated to a reasonably recent version to guarantee full compatibility with the Web Clipper’s features.
+
+<Tip>
+If unsure about your platform support or vault setup, refer to the [Integration & Compatibility](/overview/arch-overview-quickfeatures/integration-and-compatibility) documentation page for detailed explanations and recommendations.
+</Tip>

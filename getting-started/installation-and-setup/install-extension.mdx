@@ -1,0 +1,89 @@
+---
+title: "Install the Extension"
+description: "Step-by-step instructions to install Obsidian Web Clipper on major browsers and platforms, including Chrome/Chromium, Firefox, Safari on macOS and iOS, and Edge. Covers official download sources and special instructions for developer/local installations."
+---
+
+## Installing Obsidian Web Clipper: A Step-by-Step Guide
+
+Obsidian Web Clipper is available across major browsers and platforms, providing a seamless way to save and highlight web content directly into your Obsidian vault. This guide walks you through installing the extension on Chrome/Chromium browsers, Firefox, Safari for macOS and iOS, and Microsoft Edge. Whether you're installing from official stores or setting up local developer versions, follow these straightforward steps to get started quickly.
+
+---
+
+## Supported Browsers and Installation Sources
+
+The Obsidian Web Clipper supports the following browsers, each with its official download source. Installing from these trusted locations ensures you receive the latest stable features and updates:
+
+- **Chrome and Chromium-based browsers** (including Brave, Arc, Orion, and others): Install from the [Chrome Web Store](https://chromewebstore.google.com/detail/obsidian-web-clipper/cnjifjpddelmedmihgijeibhnjfabmlf).
+- **Firefox and Firefox Mobile**: Available at [Firefox Add-Ons](https://addons.mozilla.org/en-US/firefox/addon/web-clipper-obsidian/).
+- **Safari on macOS, iOS, and iPadOS**: Obtain the clipper via the [Apple App Store](https://apps.apple.com/us/app/obsidian-web-clipper/id6720708363).
+- **Microsoft Edge**: Found on the [Edge Add-Ons Store](https://microsoftedge.microsoft.com/addons/detail/obsidian-web-clipper/eigdjhmgnaaeaonimdklocfekkaanfme).
+
+Installing from these stores guarantees automatic updates, security, and official support.
+
+---
+
+## Installing from Official Web Stores
+
+### Chrome/Chromium Browsers
+After navigating to the Chrome Web Store link, click **Add to Chrome** (or the equivalent action for your Chromium variant). After confirming permissions, the extension will install and its icon will appear in your browser toolbar.
+
+### Firefox
+Click **Add to Firefox** on the Add-Ons page, accept the requested permissions, and the extension will be enabled. On mobile, install similarly via the Firefox Add-Ons interface.
+
+### Safari
+Click **Get** on the App Store page and follow the prompts to install. Once installed, enable the Web Clipper in Safari Extensions preferences. On iOS and iPadOS, tap the Extensions button in Safari and enable the clipper.
+
+### Edge
+Hit **Get** on the Edge Add-Ons page and accept permissions to complete installation.
+
+---
+
+## Installing Developer or Local Versions
+
+If you prefer to test or run the extension locally, the following instructions apply for different browsers. This may be useful for development, debugging, or if you want early access to features.
+
+### Chrome and Chromium-based Browsers
+1. Clone or download the repository and build the extension using `npm run build`.
+2. Open your browser and navigate to `chrome://extensions`.
+3. Enable **Developer mode** in the top right corner.
+4. Click **Load unpacked** and select the `dist` folder generated after build.
+5. The extension should load and be usable immediately.
+
+### Firefox
+1. Build the extension as above.
+2. Open Firefox and go to `about:debugging#/runtime/this-firefox`.
+3. Click **Load Temporary Add-on** and select the `manifest.json` inside the `dist_firefox` folder.
+
+To permanently install a custom version, Firefox's signature requirements must be disabled via `about:config` by setting `xpinstall.signatures.required` to false.
+
+### Safari (iOS Simulator on macOS)
+1. Build the extension with `npm run build`.
+2. Open the Xcode project at `xcode/Obsidian Web Clipper/Obsidian Web Clipper.xcodeproj`.
+3. Select the **Obsidian Web Clipper (iOS)** scheme.
+4. Choose an iOS Simulator device and click **Run**.
+5. When the app runs in the simulator, open Safari and tap the Extensions button to activate the clipper.
+
+---
+
+## Verifying Installation
+
+Once installed, you should see the Obsidian Web Clipper icon in your browser toolbar or extensions menu. Clicking it opens the clipper popup.
+
+For Safari on macOS, the icon and extension status can be managed in Safari Extensions preferences, accessible via a button in the clipper's welcome page.
+
+Using your browser's context menu on web pages should show additional options related to the clipper, such as saving the page, highlighting, or opening the side panel (Chrome only).
+
+---
+
+## Tips for a Smooth Installation
+
+- Ensure your browser is updated to the latest stable version to avoid compatibility issues.
+- If installing locally for development, make sure you have executed `npm run build` before loading the unpacked extension.
+- On Firefox, temporary installs expire on browser restart; for long-term usage, follow the permanent installation process.
+- Safari users must enable the extension manually in Safari preferences after installation.
+
+---
+
+For more in-depth configuration after installation, visit the [First-time Configuration](/getting-started/installation-and-setup/first-configuration) page. When ready to clip your first web page, consult [Your First Web Clip](/getting-started/starting-and-validation/your-first-clip).
+
+<Source url="https://github.com/obsidianmd/obsidian-clipper" branch="main" paths={[{"path": "README.md", "range": "1-109"},{"path": "src/managers/general-settings.ts", "range": "1-255"}]} />

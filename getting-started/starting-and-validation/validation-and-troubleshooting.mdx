@@ -1,0 +1,72 @@
+---
+title: "Validation & Troubleshooting"
+description: "Quick checks to ensure your extension works as intended, and initial steps for resolving frequent setup or permissions issues. Provides practical guidance for common problems such as missing vaults or browser-specific quirks."
+---
+
+## Validation & Troubleshooting
+
+Ensuring your Obsidian Web Clipper extension operates smoothly is key to capturing web content efficiently. This page provides practical guidance on quickly verifying your setup and resolving common issues that users encounter during initial use or routine operations.
+
+### Quick Health Checks to Confirm Extension Functionality
+
+Once the extension is installed, the first step is to confirm it can clip content reliably from your browser to Obsidian. Begin by opening the Web Clipper popup on a standard webpage. If the popup fails to open or shows an error, a reload of the page or browser restart often resolves transient hiccups.
+
+Confirm that your current page URL is a valid HTTP or HTTPS address, as the clipper only functions on these protocols and ignores blank or invalid URLs. When the popup opens, the clipper attempts to extract content intelligently, using tools like Defuddle to isolate main page content. Selecting text manually or highlighting areas on the page can help override overly conservative extraction.
+
+If your vault is configured, the clipper will present templates and display note fields pre-populated with extracted content and metadata, such as title and author. Failure to load templates or missing metadata can indicate configuration issues with storage synchronization or template definitions.
+
+To verify basic clipping functionality, perform a test clip by saving a snippet or full page content to your vault. Successful completion closes the popup (unless in side-panel mode) and creates a Markdown file in Obsidian with your specified template formatting.
+
+### Addressing Common Setup and Permissions Issues
+
+Several common problems can prevent the clipper from operating as expected, particularly around vault configuration and permissions:
+
+- **Vault Recognition and Naming**: Ensure that the vault name you configured exactly matches your Obsidian vault's name. Mismatches here lead to files not appearing or errors during save operations.
+- **Clipboard Access Limitations**: Some systems and browsers, especially on Linux or Wayland, impose restrictions on applications reading clipboard data when running in the background. This can cause Obsidian to open without content. Workarounds include switching to legacy clipping mode or ensuring clipboard permissions in your OS.
+- **Legacy Mode for Compatibility**: If your environment restricts clipboard or URI handling, enabling Legacy Mode under General Settings facilitates compatible clipping via URI protocols, though with size limitations.
+- **Browser Specific Setups**:
+  - *Firefox*: Register the Obsidian URI handler in your browser settings for smooth operation.
+  - *iOS and iPadOS*: Ensure the extension is enabled in Safari and given permission to run on all websites. Also, grant Obsidian permission to paste from other apps.
+
+### Troubleshooting Template and Content Extraction Problems
+
+If clipped content is empty or missing key sections, it's often due to how the clipper extracts content:
+
+- Defuddle filters to capture only primary article content but can exclude content you want. You can bypass this by manually selecting text or using highlights.
+- Templates with incorrect triggers or missing properties will result in unexpected output. Check your template settings for valid URL patterns and defined properties.
+- Sometimes syntax errors or missing template files cause failures; reimport or reset templates when needed.
+
+You can also review error messages in your browser's developer console for detailed diagnostics.
+
+### Managing Highlighter and Reader Modes
+
+Highlighter mode allows marking content on pages to include in your clips. Toggle highlighter mode directly in the popup or via context menu options. If toggling fails, verify you have permissions to inject scripts and your tab is on a valid page.
+
+Reader mode provides a cleaner reading interface for clipping. If reader mode does not activate or errors, reload the page or check for conflicting extensions.
+
+### Helpful Tips for Effective Validation
+
+- Use the **Refresh** button in the popup to reload content extraction if something appears stale or incorrect.
+- If you encounter a persistent error message in the popup, note the exact text and consult the [Troubleshooting guide](/getting-started/starting-and-validation/validation-and-troubleshooting) or official support channels.
+- Regularly update your extension to the latest version from your browser's store to benefit from fixes and improvements.
+
+<Warning>
+Be sure your vault and folder paths observe correct formatting and spelling. An incorrect path will cause clips not to save or appear, leading to confusion.
+</Warning>
+
+### When to Seek Help
+
+If you continue experiencing problems after following these steps, consider:
+
+- Reporting detailed issues to the [Obsidian Web Clipper GitHub repository](https://github.com/obsidianmd/obsidian-clipper/issues).
+- Joining the [official Discord support channel](https://discord.com/channels/686053708261228577/1285652864089198672) for real-time assistance.
+
+### Next Steps
+
+After validating your installation and troubleshooting common issues, you may want to explore advanced configuration or optimizing your clipping workflow. Useful next reads are:
+
+- [Your First Web Clip](/getting-started/starting-and-validation/your-first-clip): Learn how to perform your initial web clip with confidence.
+- [Use and Customize Clipping Templates](/guides/core-workflows/using-templates): Dive deeper into personalizing note content.
+- [Highlight and Annotate Web Content](/guides/core-workflows/highlighting-content): Enhance clipping by marking important sections on pages.
+
+<Source url="https://github.com/obsidianmd/obsidian-clipper" paths={[{"path": "src/core/popup.ts", "range": "10-310"}]} />

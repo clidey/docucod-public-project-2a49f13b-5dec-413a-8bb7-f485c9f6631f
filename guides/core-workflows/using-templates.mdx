@@ -1,0 +1,118 @@
+---
+title: "Use and Customize Clipping Templates"
+description: "Discover how to use and adapt templates to personalize the structure of captured notes, with step-by-step guides to variables and filters for dynamic note creation."
+---
+
+# Use and Customize Clipping Templates
+
+Templates lie at the heart of personalizing how your web clips are structured and saved into Obsidian. This page guides you through understanding, selecting, and fine-tuning templates—enabling dynamic note creation that adapts to the metadata and content of the pages you save.
+
+Templates enable you to capture not just the clipped content but also its context, such as page title, URL, author, publish date, and any other metadata you define. By mastering templates, you unlock the power to automate consistent note-taking and organization.
+
+## Understanding Templates and Their Role
+
+A template is a structured blueprint that defines how your clipped note is composed. It determines the note's file name, location within your vault, the frontmatter metadata, and the main content format. Templates use **variables** that dynamically pull data from the current web page or user input, and **filters** that transform these variables (for example, formatting dates or extracting specific text).
+
+You’ll find that each template includes several key components:
+
+- **Behavior:** Decides how the clip is saved — whether as a new note, appended or prepended to existing notes or daily notes, or overwriting existing content. This shapes your note organization and update strategy.
+- **Note name format:** Uses variables to construct the filename dynamically.
+- **Path:** Defines the folder or path where the note is saved, also templated.
+- **Note content format:** Controls the main body of your saved note.
+- **Properties:** Metadata fields included as frontmatter or note properties.
+- **Triggers:** Rules that automatically apply templates based on URL or schema.org data.
+- **Context (optional):** Custom context for advanced Interpreter usage.
+
+Each component works together to streamline the clipping process, saving you time and effort.
+
+<Tip>
+Templates are evaluated every time you clip a web page, generating a tailored note that fits your system of organization and data capture.
+</Tip>
+
+## How to Use Templates in Web Clipper
+
+When you open the Web Clipper popup, you can select from your list of templates, each preloaded with variables relevant to the current page. If a template's triggers match the page URL or its metadata, it will be automatically selected.
+
+Once a template is active, the note's filename, path, metadata properties, and content are populated dynamically. You can adjust these fields manually right in the popup before saving.
+
+Changing templates is a simple dropdown selection, and the preview fields update immediately to reflect your choice.
+
+If no templates are available, the Web Clipper creates a default template with basic metadata fields such as title and source.
+
+## Customizing Templates: Variables and Filters
+
+Templates thrive on the flexibility of variables and filters. Variables are placeholders representing dynamic data like the page’s title (`{{title}}`), URL (`{{url}}`), author (`{{author}}`), or even custom schema.org structured data.
+
+Filters modify variables to suit your formatting needs. For example, you can format dates with `|date:YYYY-MM-DD` or split authors into a list with `|split:", "|wikilink|join`.
+
+Example snippet for a property in a template:
+
+```md
+---
+title: {{title}}
+author: {{author|split:", "|wikilink|join}}
+published: {{published|date:YYYY-MM-DD}}
+---
+
+{{content}}
+```
+
+You can create complex, multiline note content by combining these variables and filters within your templates.
+
+Templates also support logic tags like loops (`{% for item in list %} ... {% endfor %}`) allowing you to iterate over lists and generate rich content.
+
+## Managing Templates Within the Extension Settings
+
+To create or edit templates, open the Web Clipper settings:
+
+- Click the **New template** button to create a fresh template.
+- Use the sidebar to select existing templates to edit.
+- Templates are saved automatically as you edit.
+
+Each template editor provides fields for name, behavior, note name, path, content format, and metadata properties. You can also define triggers — patterns to automatically select a template.
+
+Triggers can be simple URL starts-with matches, complex regular expressions, or schema.org based, enabling you to tailor the clipping experience to specific websites or page types.
+
+You can import templates from JSON files or export your current templates for backup or sharing. Use the import/export controls in your settings.
+
+<Warning>
+Changes to template behaviors such as daily note appending require the latest Obsidian daily notes plugin (version 1.7.2 or greater).
+</Warning>
+
+## Advanced Template Features
+
+When the Interpreter feature is enabled, templates can include **prompt variables** which dynamically interact with an AI model to extract or summarize content before saving.
+
+Each template can specify its own context for these prompt variables, enhancing the power to structure and refine clips using natural language processing.
+
+If enabled, the interpreter runs automatically or can be triggered manually in the popup.
+
+## Practical Tips for Success
+
+- When defining triggers, order your templates carefully — the first matching template is applied. Use the sidebar to drag templates to prioritize.
+- Always verify that your note name format generates valid file names. Use variables combined with safe characters.
+- Use filters to normalize dates and lists, improving data consistency.
+- For more control over metadata fields, customize property types and defaults in your general settings.
+- Import example templates from the [clipper-templates repo](https://github.com/kepano/clipper-templates) to get started quickly.
+
+## Troubleshooting
+
+If templates fail to load or apply:
+
+- Confirm you have templates saved in your settings.
+- Ensure triggers are correctly formatted and relevant for your current pages.
+- If your note content is empty, check that variables are valid and supported on the clipped page.
+
+If errors occur during template import/export, verify the JSON file syntax and schema compatibility.
+
+## Next Steps
+
+Mastering templates richly expands your clipping capabilities. After customizing your templates, explore how to leverage variables and filters further in [Filters and Variables: Dynamic Note Content](/guides/advanced-use-cases/filtering-variables).
+
+To extend clipping with precision, look into interpreting complex web pages with the Interpreter feature in [Interpreting and Structuring Complex Web Pages](/guides/advanced-use-cases/interpreting-webpages).
+
+For direct hands-on experience, start with the [Your First Web Clip](/getting-started/starting-and-validation/your-first-clip) guide to put templates into practice.
+
+---
+
+<Source url="https://github.com/obsidianmd/obsidian-clipper" paths={[{"path": "src/core/popup.ts", "range": "92500-93000"}, {"path": "src/managers/template-manager.ts", "range": "92600-92800"}, {"path": "src/managers/template-ui.ts", "range": "92600-92900"}, {"path": "src/utils/import-export.ts", "range": "92700-93000"}]} />

@@ -1,0 +1,94 @@
+{
+  "background": {
+    "decoration": "gradient"
+  },
+  "colors": {
+    "dark": "#1E3A8A",
+    "light": "#60A5FA",
+    "primary": "#60A5FA"
+  },
+  "favicon": "/favicon.svg",
+  "fonts": {
+    "family": "Montserrat",
+    "format": "woff2",
+    "source": "https://fonts.gstatic.com/s/googlesansflex/v5/t5sJIQcYNIWbFgDgAAzZ34auoVyXkJCOvp3SFWJbN5hF8Ju1x6sKCyp0l9sI40swNJwGpVd4AZzz0v6lJ4qFXNZhGjLvDSkV4USKMo6qQzwliVdHAy9jxTDHg_ugnAakpwGc-cxgUqDCIUI.woff2"
+  },
+  "icons": {
+    "library": "fontawesome"
+  },
+  "logo": {
+    "dark": "./logo/logo.svg",
+    "light": "./logo/logo.svg"
+  },
+  "name": "Obsidian Web Clipper",
+  "navigation": {
+    "tabs": [
+      {
+        "groups": [
+          {
+            "group": "Product Introduction \u0026 Core Concepts",
+            "pages": [
+              "overview/intro-value-coreconcepts/what-is-clipper",
+              "overview/intro-value-coreconcepts/target-users-main-usecases",
+              "overview/intro-value-coreconcepts/core-concepts-terminology"
+            ]
+          },
+          {
+            "group": "Architecture \u0026 Feature Overview",
+            "pages": [
+              "overview/arch-overview-quickfeatures/system-architecture-diagram",
+              "overview/arch-overview-quickfeatures/feature-tour",
+              "overview/arch-overview-quickfeatures/integration-and-compatibility"
+            ]
+          }
+        ],
+        "tab": "Overview"
+      },
+      {
+        "groups": [
+          {
+            "group": "Installation \u0026 Setup",
+            "pages": [
+              "getting-started/installation-and-setup/prerequisites-supported-platforms",
+              "getting-started/installation-and-setup/install-extension",
+              "getting-started/installation-and-setup/first-configuration"
+            ]
+          },
+          {
+            "group": "First Clipping \u0026 Validation",
+            "pages": [
+              "getting-started/starting-and-validation/your-first-clip",
+              "getting-started/starting-and-validation/validation-and-troubleshooting"
+            ]
+          }
+        ],
+        "tab": "Getting Started"
+      },
+      {
+        "groups": [
+          {
+            "group": "Core Workflows",
+            "pages": [
+              "guides/core-workflows/webpage-clipping",
+              "guides/core-workflows/highlighting-content",
+              "guides/core-workflows/using-templates"
+            ]
+          },
+          {
+            "group": "Advanced Use Cases",
+            "pages": [
+              "guides/advanced-use-cases/reader-mode-usage",
+              "guides/advanced-use-cases/filtering-variables",
+              "guides/advanced-use-cases/interpreting-webpages"
+            ]
+          }
+        ],
+        "tab": "Guides"
+      }
+    ]
+  },
+  "styling": {
+    "codeblocks": "dark",
+    "eyebrows": "breadcrumbs"
+  }
+}

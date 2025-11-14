@@ -1,0 +1,66 @@
+---
+title: "Readability: Using Reader Mode for Clean Clipping"
+description: "See how reader mode simplifies web pages for distraction-free reading and optimal note capture, including customizing reader appearance and extracting structured content."
+---
+
+## Enhancing Web Content Clarity with Reader Mode
+
+Reader Mode in Obsidian Web Clipper transforms complex and cluttered web pages into a clean, distraction-free reading experience. It simplifies the content presentation by removing ads, scripts, and other unnecessary elements, enabling users to focus on the core article or content they intend to clip. This refined view not only improves readability but also ensures that the clipped notes into your Obsidian vault are more structured and easier to consume.
+
+Using Reader Mode smoothly swaps your current web page content with a streamlined layout that highlights the main article, metadata like title, author, and publication date, and provides additional tools such as a navigable outline, footnotes support, and adjustable display settings.
+
+## Preparing Reader Mode and Its Settings
+
+To start with Reader Mode, the extension first loads any saved user preferences including font size, line height, maximum line width, and theme settings. These preferences control how the reader view appears, allowing it to be customized for comfort or thematic consistency.
+
+The core Reader Settings include:
+
+- **Font Size**: Controls the text size for better readability ranging typically between 12px and 24px.
+- **Line Height**: Adjusts the spacing between lines for clarity, set between 1.2 and 2.
+- **Maximum Width**: Limits the line length in em units to avoid long lines that are hard to read.
+- **Theme**: Selects between predefined visual styles such as 'Default' or 'Flexoki'.
+- **Theme Mode**: Determines if the theme follows the system preference automatically or uses explicitly set light or dark modes.
+
+When Reader Mode activates, it automatically removes potentially distracting scripts, inline styles, and external stylesheets (except reader-specific styles), ensuring a clean canvas. It also strips event listeners and disables advertisements and trackers wherever possible.
+
+Metadata extracted from the page includes the article title, author, publication date, domain, word count, and where applicable, the type of content extraction method used. The published date is intelligently formatted to a human-readable style where feasible.
+
+## Customizing Reader Display and Interaction
+
+Reader Mode offers an interactive settings bar embedded at the top of the article view. This toolbar features:
+
+- Buttons to incrementally increase or decrease **font size**, **line width**, and **line height**.
+- Dropdown selections to switch the **theme** and **theme mode** in real time.
+- A toggle button to enable or disable the **highlighter** feature directly from the reader.
+
+Each adjustment immediately updates the page's appearance and saves the new preferences locally for consistency in future uses. The system enforces sensible limits on the settings to maintain a readable and pleasant layout.
+
+For structured navigation, a **content outline** is dynamically generated based on headings (h2 to h6) within the article. This outline is displayed in a sidebar and supports smooth scrolling when clicking on any outline item. When there are fewer than two headings, the outline hides to avoid clutter. The outline also includes footnotes if present, linked and made accessible with popover previews triggered on footnote references.
+
+The footnotes feature is implemented with a popover that appears near the clicked footnote link, smartly positioning itself above or below depending on the available viewport space. The popover automatically adjusts position on window resizing or scrolling events, maintaining visibility and ease of reference without navigating away from the main text.
+
+## Additional Features for Clean Clipping
+
+Reader Mode applies syntax highlighting to code snippets present in the content using the Highlight.js library. Both block-level code (`pre > code`) and inline code marks with language indicators receive proper styling for clarity.
+
+To enhance usability, **copy buttons** are appended to every code block. These buttons allow one-click copying of code content to the clipboard, providing immediate user feedback upon success while visually indicating the copied state briefly.
+
+Images within the article are prepared for an immersive viewing experience with a built-in **lightbox**. Clicking any image (standalone, linked, or inside figures) opens it in a full-size overlay with optional caption display. Users can navigate through all images in the article via keyboard arrows or on-screen controls and close the viewer with escape key or clicking outside the image.
+
+The lightbox UI is fully accessible, with ARIA labels for screen readers and modal semantics to maintain focus within the image viewer.
+
+## Using Reader Mode in Practice
+
+Reader Mode can be toggled on or off dynamically via browser messages or extension UI controls. When enabled, it completely replaces the document content with the cleaned reader view but preserves the original HTML so that toggling Reader Mode off fully restores the page as it was.
+
+All adjustments and interactions remain in sync with the stored settings across sessions, providing a comfortable, repeatable reading and clipping experience.
+
+<Tip>
+You can customize your reading and clipping experience by adjusting Reader Mode settings such as font size and theme to match your preferences, ensuring notes captured in Obsidian remain consistent with your reading comfort.
+</Tip>
+
+<Warning>
+Reader Mode depends on content extraction by the Defuddle parser to isolate main article content. Pages with unusual or highly dynamic structures might not be fully supported, and some content may be missing or improperly formatted.
+</Warning>
+
+<Source url="https://github.com/obsidianmd/obsidian-clipper" branch="main" paths={[{"path": "src/utils/reader.ts", "range": "10-367"}]} />

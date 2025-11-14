@@ -1,0 +1,80 @@
+---
+title: "First-time Configuration"
+description: "Configure your preferred Obsidian vault and basic settings after installation. Walk through how to grant permissions, connect to Obsidian, and check initial extension settings so you’re ready to start clipping."
+---
+
+## First-time Configuration
+
+After installing the Obsidian Web Clipper extension, your next step is to set up your preferred Obsidian vault and adjust the basic settings that tailor your clipping experience. This configuration connects the extension with your Obsidian environment, enables necessary permissions, and ensures initial preferences align with how you intend to capture web content.
+
+### Grant Permissions and Connect to Your Vaults
+
+On initial launch, the extension requires permissions to access your browser environment and interact with Obsidian vaults where your clips will be saved. Clipping notes rely on precise vault folder names matching your Obsidian vaults to maintain smooth integration.
+
+Begin by adding your vaults to the extension’s settings. Vault names must exactly match the folder names of your Obsidian vaults. Adding multiple vaults allows you to choose between them when saving clips, accommodating workflows with distinct projects or knowledge domains.
+
+<Steps>
+<Step title="Open Settings">Open the extension’s settings page by clicking the gear icon or navigating via the browser extension menu.</Step>
+<Step title="Locate Vaults Section">Scroll to the “Vaults” section, typically under the 'General Settings' tab.</Step>
+<Step title="Add Vault Names">Type the exact name of each Obsidian vault you wish to save notes to in the provided input field. Press Enter after each vault name. Be precise with spelling and capitalization to avoid mismatches.</Step>
+<Step title="Verify Vault List">Check your listed vaults below the input. You can drag to reorder or use the trash icon to remove vaults.</Step>
+</Steps>
+
+### Adjust Core Settings
+
+The general settings let you refine how the Web Clipper behaves during your sessions. Key options include how clips open after saving, default save behaviors, and UI preferences.
+
+You can choose between a popup window or embedded side panel for your clipping interface. By default, the popup is selected for faster access, but embedded mode can be preferable if you prefer a persistent sidebar.
+
+For saving behavior, decide whether clips are directly added to Obsidian vaults, copied to your clipboard, or saved as Markdown files to your system. This choice impacts how you interact with saved content later.
+
+Additional toggles allow you to enable or disable legacy clipping modes, silent saves without opening notes immediately, and show/hide extra action buttons.
+
+### API Providers and Interpreter Setup (Optional)
+
+If you plan to use natural-language interpretation to extract structured data from pages, enable the interpreter feature. This requires adding one or more provider configurations with API keys. Providers and models can be managed from the Interpreter section of the settings.
+
+Providers often require API keys to authenticate your requests. The extension offers preset providers you can select from or allows adding custom provider details, including base URLs and keys.
+
+Models represent specific AI or NLP services offered by these providers. You can add models linked to providers, assign names, and configure which are enabled.
+
+This setup empowers advanced clipping workflows that automatically summarize or transform web content within your templates.
+
+### Verify Initial Settings
+
+After configuration, verify your settings by testing the extension with a simple clip:
+
+- Confirm your vaults appear as options when clipping.
+- Test that your preferred save behavior matches your expectations.
+- If using the interpreter, ensure providers and models are listed without warnings.
+
+<Tip>
+You can always revisit and adjust your vault list and settings at any time from the extension’s Options or Settings page.
+</Tip>
+
+<Warning>
+Vault names must be exact matches to avoid failed saves. Check for typos or extra whitespace when adding vaults.
+</Warning>
+
+<Source url="https://github.com/obsidianmd/obsidian-clipper" paths={[{"path": "src/core/settings.ts", "range": "1-600"},{"path": "src/managers/interpreter-settings.ts", "range": "1-300"}]} branch="main" />
+
+### Common Settings Explained
+
+Understanding some core settings helps stabilize your clipping workflow:
+
+- **Open Behavior:** Controls how the clipping interface opens. Popup mode offers a separate window, while Embedded opens a side panel within the browser.
+- **Save Behavior:** Dictates whether clippings are saved directly to your Obsidian vault, copied as markdown text to the clipboard, or downloaded as files.
+- **Silent Open:** When active, saves clipped notes without automatically opening them, streamlining bulk clipping.
+- **Legacy Mode:** Enables compatibility with older Obsidian versions by using URI-based clipping methods; however, it limits the amount of clip content.
+
+Setting these options early prevents frustration and ensures a smooth clip-to-note pipeline.
+
+### Next Steps
+
+Once your first-time configuration is complete, you are ready to capture your first web clip confidently. Learn how to [Create Your First Web Clip](/getting-started/starting-and-validation/your-first-clip) to experience the workflow firsthand.
+
+Explore further customizations through [Using and Customizing Templates](/guides/core-workflows/using-templates) for complex note structures.
+
+Visit the [Integration & Compatibility](/overview/arch-overview-quickfeatures/integration-and-compatibility) page to understand how the extension interacts deeply with Obsidian and supported platforms.
+
+You can always return to these settings to modify vaults, behavior, or interpreter options as your use of the Web Clipper evolves.

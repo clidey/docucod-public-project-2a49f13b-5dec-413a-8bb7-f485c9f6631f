@@ -1,0 +1,148 @@
+---
+title: "Core Concepts & Terminology"
+description: "Breaks down key terminology and foundational ideas: 'clipping', 'highlighting', 'templates', 'variables', 'filters', and 'Markdown notes'. Clarifies how these concepts map to the user experience and workflows within the extension."
+---
+
+# Core Concepts & Terminology
+
+Understanding the foundational concepts behind Obsidian Web Clipper is essential for harnessing its full potential. This section clarifies key terms and ideas—such as clipping, highlighting, templates, variables, filters, and Markdown notes—and connects them directly to your workflow. These concepts empower you to customize how you capture and organize web content seamlessly within Obsidian.
+
+## Defining the Essentials
+
+At its heart, Obsidian Web Clipper enables you to capture (or "clip") web content in ways that best fit your note-taking style. A *clip* is the web content you select, save, or transform into Markdown notes inside your Obsidian vault. Within this process, several core ideas play pivotal roles:
+
+- **Clipping** refers to the act of selecting content on a web page and saving it into Obsidian for future use.
+- **Highlighting** allows you to mark important text or elements on a page, visually emphasizing key information before clip-saving.
+- **Templates** are pre-defined formats that dictate how clipped content is organized into notes, including their titles, file paths, frontmatter, and body content.
+- **Variables** within templates serve as placeholders that dynamically fill with page-specific data, such as the page title, URL, or selected text.
+- **Filters** manipulate variable outputs to refine or format clipped information, enabling you to, for example, trim whitespace or change date formats.
+- **Markdown notes** are the final output files containing your clipped content, encoded in Markdown for readability, editing, and future linking.
+
+This terminology underpins not only the technical operation but shapes how you interact with the extension to tailor your personal knowledge management.
+
+## Who Benefits from These Concepts?
+
+This overview is designed primarily for users who want to deeply understand and control how web content becomes part of their Obsidian vault. Whether you’re an academic researcher, writer, or avid note-taker, knowing these core concepts equips you to create precise, repeatable clipping workflows. It also aids advanced users who want to leverage the power of variables and filters in templates to automate and customize content capture, making Web Clipper an adaptable extension that fits your unique requirements.
+
+## How Core Concepts Connect to Your Workflow
+
+The journey from webpage to note starts with *clipping* or *highlighting*. Once you decide what to capture, you apply a *template* that shapes your final note. Templates use *variables* to insert information such as {{title}} or {{date}}, ensuring your notes reflect context relevant to the page. When needed, *filters* adjust this data—like formatting dates or sanitizing text—to fit your desired style or standards.
+
+For instance, if you highlight a passage and apply a template containing the variable `{{content}}`, Web Clipper inserts that selected text exactly where you specify in the note. If you add a filter like `| trim`, it automatically removes whitespace around the extracted content before saving. This dynamic combination makes your Web Clipper experience both powerful and intuitive.
+
+
+```handlebars
+---
+title: "{{title}}"
+date: {{published | date:YYYY-MM-DD}}
+---
+
+{{content | trim}}
+```
+
+In this minimal template snippet, the note title will be the page title, the date is formatted using a filter, and the content is placed trimmed.
+
+## Clipping vs. Highlighting: What Happens Behind the Scenes
+
+While "clipping" and "highlighting" might seem interchangeable, they serve different purposes:
+
+- *Highlighting* captures and visually tags specific text or page elements. It preserves the context and lets you focus on what's important or relevant to your note.
+- *Clipping* is the process of saving that selection—or the entire page—in your Obsidian vault.
+
+Both features are integrated with templates and variables, but highlighting often involves more granular control over what gets clipped and how it appears. For example, the highlighter mode may allow multiple selections across several pages, with notes automatically compiled according to your template settings.
+
+## Templates: Structure and Flexibility
+
+Templates are central to controlling how your clips are saved. Each template is a structured set of rules that determines:
+
+- The **behavior** of saving (e.g., create new, append to daily note).
+- How note titles and file paths are generated using variables.
+- The content and metadata included in the note, formatted with Markdown.
+- Additional **properties** for frontmatter, enriched with variables.
+- Optional **triggers** to auto-select templates based on URL patterns or page content.
+
+By mastering templates, you gain granular control over your clipping outputs. You can craft custom workflows—like capturing research summaries, saving annotated excerpts, or creating structured logs—that fit effortlessly with your vault organization.
+
+## Variables: Dynamic Placeholders
+
+Variables are placeholders encapsulated in double curly braces (`{{ }}`) within templates. They pull data from the current page or the user’s selection dynamically:
+
+- Common variables include the page `title`, `url`, `published` date, or your `selectedText` (from highlights).
+- Variables inject live data when you clip, personalizing your note without manual input.
+
+Using variables transforms static matter into context-rich notes that automatically adapt to each clipped webpage.
+
+## Filters: Refining Variable Output
+
+Filters enhance variables by processing or formatting their output before insertion. Pipes (`|`) separate variables from their filters, enabling you to adjust content inline.
+
+For example:
+
+```handlebars
+{{published | date:YYYY-MM-DD}}
+{{content | escapeHtml | trim}}
+```
+
+This feature is especially useful for:
+
+- Formatting dates or text
+- Escaping HTML characters
+- Trimming unwanted spaces
+- Modifying text case
+
+Filters let you ensure consistency and readability in your notes by automating common formatting tasks.
+
+## Markdown Notes: Your Organized Records
+
+Every clip and highlight you save is ultimately stored as a Markdown (`.md`) file in your Obsidian vault. This format offers several advantages:
+
+- Human-readable and widely compatible
+- Supports links, images, and rich metadata
+- Editable with standard Markdown syntax or Obsidian’s enhanced features
+
+Your saved notes can include YAML frontmatter populated with properties, enabling further automation inside Obsidian.
+
+<Note>
+Understanding these terms builds the foundation for mastering the Web Clipper. When you grasp how clipping, highlighting, templates, variables, and filters work together, you unlock the tool’s full potential.
+</Note>
+
+## Practical Example: Clipping With Templates and Variables
+
+Imagine you want to save an article summary with metadata. You highlight the key paragraph on the page and choose a template that formats your note like this:
+
+```handlebars
+---
+source: {{url}}
+title: {{title}}
+author: {{author}}
+date: {{published | date:YYYY-MM-DD}}
+---
+
+{{content | trim}}
+
+*Clipped from {{domain}}*
+```
+
+When you clip, the variables fill dynamically:
+
+- `{{url}}`: current page URL
+- `{{title}}`: page title
+- `{{author}}`: recognized author if available
+- `{{published}}`: publication date, filtered and formatted
+- `{{content}}`: your highlighted text, trimmed
+- `{{domain}}`: domain extracted from the URL
+
+The output is a neatly formatted Markdown note enriched with metadata, ready for immediate review or linking.
+
+## Summary
+
+This page breaks down core concepts and terminology critical to your experience with Obsidian Web Clipper. Knowing these terms means:
+
+- Better understanding of the clipping and highlighting process
+- Ability to customize templates with variables and filters
+- Clarity on how data flows from web content to your Markdown vault notes
+- Empowerment to create personalized, streamlined workflows
+
+Next, explore how to use these concepts in the [Using and Customizing Templates](/guides/core-workflows/using-templates) and [Filters and Variables](/guides/advanced-use-cases/filtering-variables) guides to deepen your expertise.
+
+<Source url="https://github.com/obsidianmd/obsidian-clipper" branch="main" paths={[{"path": "src/types/types.ts", "range": "1-120"},{"path": "src/core/popup.ts", "range": "1-800"}]} />

@@ -1,0 +1,83 @@
+---
+title: "Clip and Save a Web Page to Obsidian"
+description: "Learn how to quickly capture entire web pages or article excerpts, edit note details, and store them as durable Markdown files in your Obsidian vault. Covers the step-by-step flow from browser to note."
+---
+
+# Clip and Save a Web Page to Obsidian
+
+Capturing content from the web and saving it seamlessly into your Obsidian vault transforms your note-taking experience, preserving knowledge with minimal disruption. This guide walks you through the straightforward process of using the Obsidian Web Clipper to grab entire web pages or selected excerpts, customize details, and store them as durable Markdown notes locally in your vault. The workflow balances powerful extraction with intuitive editing, helping you efficiently build your knowledge base.
+
+## Preparing to Clip: What You Need First
+
+Before capturing your first page, ensure the Obsidian Web Clipper extension is installed and running in your browser. The extension supports major browsers including Chrome, Firefox, Edge, and Safari. Confirm that your Obsidian vaults are properly linked within the extension’s settings so that saved content routes correctly to your chosen destination. Also, be sure the browser tab you want to clip from contains a valid, fully loaded web page, as clipping an invalid or blank page is not supported.
+
+To smoothly capture content, the extension relies on content scripts injected into the active tab. These scripts extract the page content, highlight data if any, and communicate with the popup UI for customization. The background script manages these injections and ensures communication flows smoothly. Thanks to intelligent filtering, the clipper extracts the main article content by default, discarding extraneous page elements.
+
+<Source url="https://github.com/obsidianmd/obsidian-clipper" paths={[{"path": "src/background.ts", "range": "1-546"}]} />
+
+## How to Capture and Save Content
+
+Once ready, follow these steps to clip content into your Obsidian vault with precision and control.
+
+<Steps>
+<Step title="Open the Web Clipper popup">
+Activate the extension by clicking your browser’s Obsidian icon, pressing the configured hotkey, or right-clicking the page to use the context menu. The popup displays the current page’s extracted content, ready for you to review.
+</Step>
+<Step title="Review or select content to clip">
+By default, Web Clipper extracts the main article or page content. If you have highlighted text or page elements beforehand, the clipper prioritizes these highlights. You can also manually select portions of the web page before opening the popup to clip just your selection.
+</Step>
+<Step title="Choose your clipping template">
+Select from your saved templates in the **Template** dropdown to customize the format and metadata of your saved note. Templates define how content is structured, including note naming conventions, folder placement, and additional metadata properties.
+</Step>
+<Step title="Edit note metadata and content">
+Use the properties section to adjust automatically extracted metadata or add your own. The main note content textarea lets you refine or add more notes before saving. These fields support Markdown syntax for flexibility.
+</Step>
+<Step title="Set your vault and folder destination">
+In the footer section, choose the vault where the note will be saved and specify the folder path. Templates can preset these values or you can customize them for each clip.
+</Step>
+<Step title="Save or export your clipped note">
+Click the **Add to Obsidian** button to save your content as a Markdown note in the selected vault. Alternatively, use the **More** menu for quick actions like copying content to the clipboard or saving the file directly.
+</Step>
+</Steps>
+
+Capturing workflow is crafted to be fluid. The clipper even offers a **Quick Clip** hotkey to instantly save using your current template and vault settings.
+
+<Source url="https://github.com/obsidianmd/obsidian-clipper" paths={[{"path": "src/core/popup.ts", "range": "100-650"}]} />
+
+## Ensuring Smooth Capturing and Common Troubleshooting
+
+Validate that the tab’s URL is supported (generally HTTP/S web pages) and not a browser-internal or blank page, as these cannot be clipped. If highlights or selections are missing, make sure you have activated the highlighter mode or actively selected text before opening the clipper popup.
+
+If the clipper popup displays an error or empty fields, try refreshing the popup or the web page. Your templates must be properly configured and present—without templates, clipping cannot proceed.
+
+Highlighter interactions can be toggled via the context menu or dedicated popup button. If highlighter mode does not toggle as expected, verify your browser permissions and ensure content scripts are injected correctly. The extension’s background script monitors and manages these injections automatically.
+
+<Warning>
+Clipping will not work properly on browser internal pages, blank pages, or unsupported URLs. Select valid web page content before attempting to clip.
+</Warning>
+
+## After Clipping: Where to Go Next
+
+With your content safely saved in Obsidian as Markdown, leverage the power of templates and variables to create richer notes automatically tailored to each web page. To extend functionality, explore Web Clipper’s highlighting features for selective clipping and annotation, or use the reader mode for distraction-free content extraction.
+
+Dive deeper into customizing your save process with [[Using and Customizing Clipping Templates|Using Templates]], or enhance your notes dynamically with [[Filters and Variables: Dynamic Note Content|Filtering Variables]].
+
+For troubleshooting and optimizing your clipping experience, see the [[Validation & Troubleshooting]] guide.
+
+Start building your personalized knowledge archive from the web, confidently and efficiently.
+
+<Info>
+Remember to keep your templates up to date and link your vaults correctly to avoid clipping errors.
+</Info>
+
+---
+
+Explore these related documents to master your workflow:
+
+- [[Your First Web Clip]](/getting-started/starting-and-validation/your-first-clip)
+- [[Highlight and Annotate Web Content]](/guides/core-workflows/highlighting-content)
+- [[Readability: Using Reader Mode for Clean Clipping]](/guides/advanced-use-cases/reader-mode-usage)
+
+For technical insight, refer to the source code in `src/core/popup.ts` and `src/background.ts` related to popup management and scripting injection.
+
+<Source url="https://github.com/obsidianmd/obsidian-clipper" paths={[{"path": "src/core/popup.ts", "range": "1-332"},{"path": "src/background.ts", "range": "1-546"}]} />
