@@ -1,0 +1,105 @@
+---
+title: "Interpreting and Structuring Complex Web Pages"
+description: "Walk through techniques for handling unusual or rich web pages, customizing extraction, interpreting dynamic content, and troubleshooting edge cases with the interpreter tools."
+---
+
+# Interpreting and Structuring Complex Web Pages
+
+The Interpreting and Structuring Complex Web Pages page guides you through advanced techniques to capture, extract, and transform content from web pages that may not follow conventional layouts or contain rich dynamic elements. This page is essential when default content extraction doesn’t yield the results you expect, or when you need precise control over the data that feeds into your notes.
+
+With Obsidian Web Clipper’s Interpreter tools, you can leverage natural language models to analyze and reshape web page content dynamically. This empowers you to save tailored snippets, convert formats, summarize, or enrich your clipped notes in ways that go beyond standard scraping. Whether you’re dealing with dense technical articles, multi-section reports, or pages laden with nested markup, this page helps you harness those complexities effectively.
+
+Expect to learn to identify content extraction challenges, customize context for natural language interpretation, and troubleshoot common edge cases that arise with intricate pages. The difficulty level is moderate to advanced, often requiring experimentation, with workflows that can be completed in 10-30 minutes depending on complexity.
+
+## Understanding Content Extraction Challenges
+
+Complex web pages can introduce challenges such as deeply nested elements, dynamic loading, or unconventional HTML structures that hinder automatic parsing. The Obsidian Web Clipper by default uses an extractor called Defuddle to parse main content. Defuddle analyzes the page structure to isolate the primary article text, metadata like the author, title, published date, and other elements.
+
+However, in some cases, Defuddle’s heuristic extraction might not identify the content you need, or you may want to extract a specific part of the page instead of the full article. Common complexities include:
+
+- Pages with multiple content sections or modular layouts
+- Dynamically rendered content loaded via JavaScript
+- Embedded media or interactive elements
+- Pages with custom formatting or proprietary markup
+
+To handle these, you can tailor the extraction process by adjusting the interpretation context or using selector-based variables to target specific HTML elements.
+
+## Customizing Interpreter Context for Targeted Extraction
+
+Interpreter’s power comes from its ability to send page content to a language model for processing using natural language prompts embedded inside your templates. By default, the entire page HTML might be used as input context, but this can be slow and expensive.
+
+To optimize:
+
+- Define the context precisely in your template’s Interpreter settings by using selector variables like `{{selectorHtml:#main}}` which only feed the content inside the `#main` element for interpretation.
+- Apply HTML filters such as `remove_html`, `strip_tags`, or `strip_attr` to clean and reduce the data passed, speeding up the interpreter response while focusing on meaningful content.
+
+These adjustments allow you to interpret only the relevant part of the page, improving accuracy and performance when extracting or transforming data.
+
+For example, a template context definition might look like this:
+
+```markdown
+{{selectorHtml:#article-content|remove_html:("script,style,iframe")|strip_tags:("a,img")}}
+```
+
+This extracts the HTML content inside an element with id `article-content`, removes unwanted tags and scripts, and presents a simplified version to the interpreter.
+
+## Leveraging Prompt Variables with Interpreter
+
+You add natural language prompts in your templates using variables like `{{"summarize this article in three bullet points"}}`. When the Interpreter is enabled and your template contains these prompt variables, the extension sends the prompt along with the selected context to the chosen language model.
+
+Interpreter handles multiple prompts in a single request, returning JSON-formatted responses that replace the prompt variables in your note content or properties. This lets you dynamically generate summaries, translations, explanations, or custom transformations right within the clipping workflow.
+
+To use Interpreter effectively:
+
+1. Enable Interpreter and configure your model provider in the Web Clipper settings.
+2. Add prompt variables to your clip template where natural language processing is needed.
+3. Use variable filters to format the output, e.g., converting bullet points to Markdown list syntax.
+
+Interpreter supports several popular AI providers and local models, requiring API keys or connectors depending on your configuration.
+
+## Troubleshooting Edge Cases
+
+When working with complex web pages, you might encounter issues such as:
+
+- Interpreter failing to extract content or returning empty responses
+- Rate limits or API key errors with your model provider
+- Slow processing due to large context sizes
+- Inaccurate or irrelevant interpreter outputs
+
+To mitigate these:
+
+- Narrow down the interpreter context using selector and filtering variables.
+- Ensure your provider API keys and models are correctly configured and enabled.
+- Use smaller or more efficient models for faster results.
+- Check error messages in the UI and consult logs for diagnostics.
+
+If a prompt fails, the Interpreter UI highlights errors and disables the clip action until resolved.
+
+Additionally, fallback to manual template variables or simpler extraction methods when automated interpretation isn’t suitable.
+
+## Practical Tips for Using Interpreter
+
+- Start by testing prompts on smaller page sections rather than full HTML.
+- Use filters extensively to format and sanitize outputs.
+- Gradually build prompt complexity combining extraction and transformation tasks.
+- Leverage the presets and model management pages to select thoroughly tested providers and models for reliability.
+
+By structuring your template and prompts carefully, you can handle even highly unusual pages effectively.
+
+## Related Functionality and Resources
+
+Refer to the following guides for complementary workflow steps:
+
+- [Use and Customize Clipping Templates](/guides/core-workflows/using-templates) for template syntax and variable usage.
+- [Interpret web pages](/docs/Interpret web pages.md) for comprehensive details on configuring and using Interpreter.
+- [Highlight and Annotate Web Content](/guides/core-workflows/highlighting-content) to combine Interpreter with highlights.
+
+For troubleshooting Interpreter, consult the [Validation & Troubleshooting](/getting-started/starting-and-validation/validation-and-troubleshooting) guide.
+
+Explore code related to Interpreter and Reader modes in `src/utils/interpreter.ts` and `src/utils/reader.ts` for insight into core algorithms and integration points.<Source url="https://github.com/obsidianmd/obsidian-clipper" branch="main" paths={[{"path": "src/utils/interpreter.ts", "range": "1-320"},{"path": "src/utils/reader.ts", "range": "1-377"}]} />
+
+---
+
+For interface usage, see the popup page (`src/core/popup.ts`) which manages interactions relating to template application, Interpreter execution, and UI updates.
+
+This page integrates with Obsidian Web Clipper’s core workflows and advanced use cases, placing you in control of even the most challenging and feature-rich web clipping scenarios.
